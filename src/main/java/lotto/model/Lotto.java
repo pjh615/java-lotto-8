@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.List;
 
@@ -16,5 +16,15 @@ public class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
+    public boolean containsNumber(int number) {
+        return numbers.contains(number);
+    }
+
+    public void printNumbers() {
+        System.out.println(numbers);
+    }
+
+    public Integer matchNumber(final Lotto lotto) {
+        return Math.toIntExact(lotto.numbers.stream().filter(this.numbers::contains).count());
+    }
 }
