@@ -35,7 +35,7 @@ public class InputHandler {
     public Integer getBonusNumber(List<Integer> numbers) {
         String input = inputView.inputBonusNumber();
         Integer bonusNumber = Parser.convertStringToInteger(input);
-        validatePositiveNumber(bonusNumber);
+        validateRange(bonusNumber);
         validateDuplicate(numbers, bonusNumber);
         return bonusNumber;
     }
@@ -59,6 +59,12 @@ public class InputHandler {
 
         if (start < 1 | start > 45 | end < 1 | end > 45) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 1~45까지의 숫자입니다. 올바른 범위의 수를 입력하세요.");
+        }
+    }
+
+    private static void validateRange(Integer number) {
+        if (number < 1 | number > 45) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1~45까지의 숫자입니다. 올바른 범위의 수를 입력하세요.");
         }
     }
 
