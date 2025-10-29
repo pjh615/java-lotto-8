@@ -96,4 +96,33 @@ class InputHandlerTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
+
+    @Test
+    void 보너스번호_기능_테스트() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+
+        inputViewTest.setBonusNumber("7");
+        Integer bonusNumber = inputHandler.getBonusNumber(winningLotto);
+        assertThat(bonusNumber).isEqualTo(7);
+    }
+
+    @Test
+    void 보너스번호_범위_예외() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+
+        inputViewTest.setBonusNumber("0");
+        assertThatThrownBy(() -> inputHandler.getBonusNumber(winningLotto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    void 보너스번호_중복_예외() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+
+        inputViewTest.setBonusNumber("6");
+        assertThatThrownBy(() -> inputHandler.getBonusNumber(winningLotto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
 }
