@@ -61,18 +61,39 @@ class InputHandlerTest {
     @Test
     void 구입금액_음수_예외() {
         inputViewTest.setPurchasePrice("-1000");
-        assertThatThrownBy(()-> inputHandler.getPurchasePrice())
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[ERROR]");
+        assertThatThrownBy(() -> inputHandler.getPurchasePrice())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
     }
 
     @Test
     void 구입금액_배수_예외() {
         inputViewTest.setPurchasePrice("1234");
-        assertThatThrownBy(()-> inputHandler.getPurchasePrice())
+        assertThatThrownBy(() -> inputHandler.getPurchasePrice())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
-    
+    @Test
+    void 당첨번호_기능_테스트() {
+        inputViewTest.setWinningLotto("1,2,3,4,5,6");
+        List<Integer> winningLotto = inputHandler.getWinningLotto();
+        assertThat(winningLotto).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
+    @Test
+    void 당첨번호_범위_예외() {
+        inputViewTest.setWinningLotto("1,2,3,4,5,46");
+        assertThatThrownBy(() -> inputHandler.getWinningLotto())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    void 당첨번호_중복_예외() {
+        inputViewTest.setWinningLotto("1,1,3,4,5,6");
+        assertThatThrownBy(() -> inputHandler.getWinningLotto())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
 }
