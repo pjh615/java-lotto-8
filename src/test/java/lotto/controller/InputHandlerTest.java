@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.model.Lotto;
 import lotto.view.ConsoleInputView;
 import lotto.view.InputView;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,8 +78,10 @@ class InputHandlerTest {
     @Test
     void 당첨번호_기능_테스트() {
         inputViewTest.setWinningLotto("1,2,3,4,5,6");
-        List<Integer> winningLotto = inputHandler.getWinningLotto();
-        assertThat(winningLotto).containsExactly(1, 2, 3, 4, 5, 6);
+        Lotto expected = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        Lotto winningLotto = inputHandler.getWinningLotto();
+        assertThat(winningLotto.matchNumber(expected)).isEqualTo(6);
     }
 
     @Test
@@ -99,7 +102,7 @@ class InputHandlerTest {
 
     @Test
     void 보너스번호_기능_테스트() {
-        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         inputViewTest.setBonusNumber("7");
         Integer bonusNumber = inputHandler.getBonusNumber(winningLotto);
@@ -108,7 +111,7 @@ class InputHandlerTest {
 
     @Test
     void 보너스번호_범위_예외() {
-        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         inputViewTest.setBonusNumber("0");
         assertThatThrownBy(() -> inputHandler.getBonusNumber(winningLotto))
@@ -118,7 +121,7 @@ class InputHandlerTest {
 
     @Test
     void 보너스번호_중복_예외() {
-        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         inputViewTest.setBonusNumber("6");
         assertThatThrownBy(() -> inputHandler.getBonusNumber(winningLotto))
