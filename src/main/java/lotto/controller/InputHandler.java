@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.model.Lotto;
 import lotto.util.Parser;
 import lotto.view.InputView;
 
@@ -21,22 +22,22 @@ public class InputHandler {
         return purchase;
     }
 
-    public List<Integer> getWinningLotto() {
+    public Lotto getWinningLotto() {
         String input = inputView.inputWinningLotto();
-        List<Integer> winningLotto = Parser.parseByDelimiter(input, ",").stream()
+        List<Integer> winningNumbers = Parser.parseByDelimiter(input, ",").stream()
                 .map(Parser::convertStringToInteger)
                 .sorted()
                 .toList();
-        validateRange(winningLotto);
-        validateDuplicate(winningLotto);
-        return winningLotto;
+        validateRange(winningNumbers);
+        validateDuplicate(winningNumbers);
+        return new Lotto(winningNumbers);
     }
 
-    public Integer getBonusNumber(List<Integer> numbers) {
+    public Integer getBonusNumber(Lotto lotto) {
         String input = inputView.inputBonusNumber();
         Integer bonusNumber = Parser.convertStringToInteger(input);
         validateRange(bonusNumber);
-        validateDuplicate(numbers, bonusNumber);
+        validateDuplicate(lotto, bonusNumber);
         return bonusNumber;
     }
 
@@ -74,8 +75,8 @@ public class InputHandler {
         }
     }
 
-    private static void validateDuplicate(List<Integer> numbers, Integer number) {
-        if (numbers.contains(number)) {
+    private static void validateDuplicate(Lotto lotto, Integer number) {
+        if (lotto.containsNumber(number)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복되지 않는 보너스 번호를 입력해주세요.");
         }
     }
