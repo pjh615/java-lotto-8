@@ -2,11 +2,11 @@ package lotto.util;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Parser {
 
-    private Parser() {}
+    private Parser() {
+    }
 
     public static List<String> parseByDelimiter(final String input, final String delimiter) {
         return Arrays.stream(input.split(delimiter))
@@ -15,6 +15,10 @@ public class Parser {
     }
 
     public static Integer convertStringToInteger(final String input) {
-        return Integer.parseInt(input);
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] " + input + " 는 숫자가 아닙니다.");
+        }
     }
 }
