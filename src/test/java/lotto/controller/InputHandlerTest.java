@@ -1,8 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
-import lotto.view.ConsoleInputView;
-import lotto.view.InputView;
+import lotto.view.InputViewTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,37 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class InputHandlerTest {
     private InputHandler inputHandler;
     private InputViewTest inputViewTest;
-
-    private static class InputViewTest implements InputView {
-        private String purchasePrice;
-        private String winningLotto;
-        private String bonusNumber;
-
-        void setPurchasePrice(String purchasePrice) {
-            this.purchasePrice = purchasePrice;
-        }
-
-        void setWinningLotto(String winningLotto) {
-            this.winningLotto = winningLotto;
-        }
-
-        void setBonusNumber(String bonusNumber) {
-            this.bonusNumber = bonusNumber;
-        }
-
-        @Override
-        public String inputPurchasePrice() {
-            return purchasePrice;
-        }
-
-        public String inputWinningLotto() {
-            return winningLotto;
-        }
-
-        public String inputBonusNumber() {
-            return bonusNumber;
-        }
-    }
 
     @BeforeEach
     void setUp() {
