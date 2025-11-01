@@ -21,7 +21,7 @@ public class OutputView {
     public void displayStatistics(EnumMap<Prize, Integer> prizes) {
         System.out.println("당첨 통계");
         System.out.println("---");
-        System.out.printf("3개 일치 (5,000원) -  %d개\n", prizes.get(Prize.FIFTH_PRIZE));
+        System.out.printf("3개 일치 (5,000원) - %d개\n", prizes.get(Prize.FIFTH_PRIZE));
         System.out.printf("4개 일치 (50,000원) - %d개\n", prizes.get(Prize.FOURTH_PRIZE));
         System.out.printf("5개 일치 (1,500,000원) - %d개\n", prizes.get(Prize.THRID_PRIZE));
         System.out.printf("5개 일치, 보너스 볼 일치 (30,000,000원) - %d개\n", prizes.get(Prize.SECOND_PRIZE));
@@ -29,7 +29,7 @@ public class OutputView {
     }
 
     public void displayProfit(double profitRate) {
-        System.out.printf("총 수익률은 %.2f%%입니다.", profitRate);
+        System.out.printf("총 수익률은 %.1f%%입니다.", profitRate);
     }
 
 }
