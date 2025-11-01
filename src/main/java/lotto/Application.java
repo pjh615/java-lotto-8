@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.InputHandler;
 import lotto.controller.LottoController;
+import lotto.service.LottoService;
 import lotto.util.LottoGenerator;
 import lotto.util.RandomNumberGenerator;
 import lotto.view.ConsoleInputView;
@@ -13,9 +14,10 @@ public class Application {
         InputView inputView = new ConsoleInputView();
         InputHandler inputHandler = new InputHandler(inputView);
         RandomNumberGenerator randomNumberGenerator = new LottoGenerator();
+        LottoService lottoService = new LottoService(inputHandler, randomNumberGenerator);
         OutputView outputView = new OutputView();
 
-        LottoController lottoController = new LottoController(inputHandler, randomNumberGenerator, outputView);
+        LottoController lottoController = new LottoController(lottoService, outputView);
         lottoController.run();
     }
 }
