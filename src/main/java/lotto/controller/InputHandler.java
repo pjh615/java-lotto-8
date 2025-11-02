@@ -25,7 +25,8 @@ public class InputHandler {
 
     public Lotto getWinningLotto() {
         String input = inputView.inputWinningLotto();
-        List<Integer> winningNumbers = Parser.parseByDelimiter(input, ",").stream()
+        List<Integer> winningNumbers =
+                Parser.parseByDelimiter(input, Constants.DEFAULT_DELIMITER).stream()
                 .map(Parser::convertStringToInteger)
                 .sorted()
                 .toList();
