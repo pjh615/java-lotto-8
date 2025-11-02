@@ -1,32 +1,36 @@
 package lotto.view;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class InputViewTest implements InputView {
-    private String purchasePrice;
-    private String winningLotto;
-    private String bonusNumber;
+    private final Queue<String> purchasePrices = new LinkedList<>();
+    private final Queue<String> winningLottos = new LinkedList<>();
+    private final Queue<String> bonusNumbers = new LinkedList<>();
 
-    public void setPurchasePrice(String purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public void setPurchasePrice(String... purchasePrice) {
+        purchasePrices.addAll(List.of(purchasePrice));
     }
 
-    public void setWinningLotto(String winningLotto) {
-        this.winningLotto = winningLotto;
+    public void setWinningLotto(String... winningLotto) {
+        winningLottos.addAll(List.of(winningLotto));
     }
 
-    public void setBonusNumber(String bonusNumber) {
-        this.bonusNumber = bonusNumber;
+    public void setBonusNumber(String... bonusNumber) {
+        bonusNumbers.addAll(List.of(bonusNumber));
     }
 
     @Override
     public String inputPurchasePrice() {
-        return purchasePrice;
+        return purchasePrices.poll();
     }
 
     public String inputWinningLotto() {
-        return winningLotto;
+        return winningLottos.poll();
     }
 
     public String inputBonusNumber() {
-        return bonusNumber;
+        return bonusNumbers.poll();
     }
 }
