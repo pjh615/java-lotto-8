@@ -8,11 +8,11 @@ import java.util.List;
 
 public class OutputView {
     private static final List<Prize> DISPLAY_PRIZES = List.of(
-            Prize.FIRST_PRIZE,
-            Prize.SECOND_PRIZE,
-            Prize.THIRD_PRIZE,
+            Prize.FIFTH_PRIZE,
             Prize.FOURTH_PRIZE,
-            Prize.FIFTH_PRIZE
+            Prize.THIRD_PRIZE,
+            Prize.SECOND_PRIZE,
+            Prize.FIRST_PRIZE
     );
 
     public void displayLottoCount(int lottoCount) {
