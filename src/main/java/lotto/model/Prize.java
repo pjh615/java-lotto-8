@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 
 public enum Prize {
@@ -22,15 +23,13 @@ public enum Prize {
     }
 
     public static Prize find(Integer matchCount, boolean isBonusMatch) {
-        if (matchCount == 5 && isBonusMatch) {
+        if (SECOND_PRIZE.matchCount.equals(matchCount) && isBonusMatch) {
             return SECOND_PRIZE;
         }
-        for (Prize prize : Prize.values()) {
-            if ((prize.matchCount == matchCount) && (prize != SECOND_PRIZE)) {
-                return prize;
-            }
-        }
-        return MISS;
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount.equals(matchCount) && prize != SECOND_PRIZE)
+                .findFirst()
+                .orElse(MISS);
     }
 
     public static int calculatePrize(final EnumMap<Prize, Integer> prizes) {
