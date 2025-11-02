@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.util.Constants;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,13 +17,13 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != Constants.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
     }
 
     private void validateRange(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(n -> n < 1 || n > 45)) {
+        if (numbers.stream().anyMatch(n -> n < Constants.LOTTO_NUMBER_MIN || n > Constants.LOTTO_NUMBER_MAX)) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1~45까지의 숫자로 이루어져야 합니다.");
         }
     }

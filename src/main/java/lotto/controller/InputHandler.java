@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
+import lotto.util.Constants;
 import lotto.util.Parser;
 import lotto.view.InputView;
 
@@ -49,22 +50,19 @@ public class InputHandler {
     }
 
     private static void validateMultipleOfThousand(Integer number) {
-        if ((number % 1000) != 0) {
+        if ((number % Constants.LOTTO_PRICE) != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력하세요.");
         }
     }
 
     private static void validateRange(List<Integer> numbers) {
-        int start = numbers.getFirst();
-        int end = numbers.getLast();
-
-        if (start < 1 | start > 45 | end < 1 | end > 45) {
+        if (numbers.stream().anyMatch(n -> n < Constants.LOTTO_NUMBER_MIN || n > Constants.LOTTO_NUMBER_MAX)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 1~45까지의 숫자입니다. 올바른 범위의 수를 입력하세요.");
         }
     }
 
     private static void validateRange(Integer number) {
-        if (number < 1 | number > 45) {
+        if (number < Constants.LOTTO_NUMBER_MIN | number > Constants.LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 1~45까지의 숫자입니다. 올바른 범위의 수를 입력하세요.");
         }
     }

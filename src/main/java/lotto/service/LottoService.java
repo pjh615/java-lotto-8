@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.controller.InputHandler;
 import lotto.model.Lotto;
 import lotto.model.Prize;
+import lotto.util.Constants;
 import lotto.util.RandomNumberGenerator;
 
 import java.util.ArrayList;
@@ -49,13 +50,13 @@ public class LottoService {
     }
 
     public Integer calculateLottoCount(Integer purchasePrice) {
-        return purchasePrice / 1000;
+        return purchasePrice / Constants.LOTTO_PRICE;
     }
 
     public List<Lotto> generateLottos(Integer lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(randomNumberGenerator.generateRandomNumbers(1, 45, 6)));
+            lottos.add(new Lotto(randomNumberGenerator.generateRandomNumbers(Constants.LOTTO_NUMBER_MIN, Constants.LOTTO_NUMBER_MAX, Constants.LOTTO_NUMBER_COUNT)));
         }
         return lottos;
     }
