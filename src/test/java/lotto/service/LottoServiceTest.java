@@ -1,30 +1,45 @@
 package lotto.service;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
 import lotto.controller.InputHandler;
 import lotto.model.Lotto;
 import lotto.model.Prize;
 import lotto.util.LottoGenerator;
 import lotto.util.RandomNumberGenerator;
 import lotto.view.InputViewTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.EnumMap;
 import java.util.List;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoServiceTest {
+    private InputViewTest inputViewTest;
     private LottoService lottoService;
-    private InputHandler inputHandler;
-    private RandomNumberGenerator randomNumberGenerator;
+
+    private final PrintStream systemOut = System.out;
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @BeforeEach
     void setUp() {
-        InputViewTest inputView = new InputViewTest();
-        inputHandler = new InputHandler(inputView);
-        randomNumberGenerator = new LottoGenerator();
+        System.setOut(new PrintStream(outputStream));
+
+        inputViewTest = new InputViewTest();
+        InputHandler inputHandler = new InputHandler(inputViewTest);
+        RandomNumberGenerator randomNumberGenerator = new LottoGenerator();
         lottoService = new LottoService(inputHandler, randomNumberGenerator);
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.setOut(systemOut);
     }
 
     @Test
@@ -82,5 +97,37 @@ public class LottoServiceTest {
         double actual = lottoService.calculateProfitRate(prizeStatistics, purchasePrice);
         double expected = (double) 5_000 / purchasePrice * 100;
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void 구입금액_입력_예외_발생_재입력_테스트() {
+        inputViewTest.setPurchasePrice("1000j", "2500", "4000");
+        Integer purchasePrice = lottoService.getPurchasePrice();
+        assertThat(purchasePrice).isEqualTo(4000);
+
+        String output = outputStream.toString();
+        assertThat(output).contains("[ERROR]");
+    }
+
+    @Test
+    void 당첨번호_입력_예외_발생_재입력_테스트() {
+        inputViewTest.setWinningLotto("1,2,3,4,5,5", "1,2,3,4,5,6");
+        Lotto winningLotto = lottoService.getWinningLotto();
+        Lotto expected = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(winningLotto.matchNumber(expected)).isEqualTo(6);
+
+        String output = outputStream.toString();
+        assertThat(output).contains("[ERROR]");
+    }
+
+    @Test
+    void 보너스번호_입력_예외_발생_재입력_테스트() {
+        inputViewTest.setBonusNumber("1,7", "7");
+        Integer bonusNumber = lottoService.getBonusNumber(new Lotto(List.of(1,2,3,4,5,6)));
+        Integer expected = 7;
+        assertThat(bonusNumber).isEqualTo(expected);
+
+        String output = outputStream.toString();
+        assertThat(output).contains("[ERROR]");
     }
 }
