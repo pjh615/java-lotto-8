@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -37,8 +38,8 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public void printNumbers() {
-        System.out.println(numbers);
+    public String toString() {
+        return numbers.toString();
     }
 
     public Integer matchNumber(final Lotto lotto) {
