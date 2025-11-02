@@ -55,7 +55,7 @@ class PrizeTest {
     void 로또_3등_테스트() {
         Integer matchCount = 5;
         boolean isBonusMatch = false;
-        assertThat(Prize.find(matchCount, isBonusMatch)).isEqualTo(Prize.THRID_PRIZE);
+        assertThat(Prize.find(matchCount, isBonusMatch)).isEqualTo(Prize.THIRD_PRIZE);
     }
 
     @Test
@@ -77,7 +77,7 @@ class PrizeTest {
         EnumMap<Prize, Integer> prizes = new EnumMap<>(Prize.class);
 
         prizes.put(Prize.SECOND_PRIZE, 2);
-        prizes.put(Prize.THRID_PRIZE, 3);
+        prizes.put(Prize.THIRD_PRIZE, 3);
         prizes.put(Prize.FOURTH_PRIZE, 2);
         prizes.put(Prize.FIFTH_PRIZE, 3);
         Integer actual = Prize.calculatePrize(prizes);

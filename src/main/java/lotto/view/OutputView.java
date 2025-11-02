@@ -10,7 +10,7 @@ public class OutputView {
     private static final List<Prize> DISPLAY_PRIZES = List.of(
             Prize.FIRST_PRIZE,
             Prize.SECOND_PRIZE,
-            Prize.THRID_PRIZE,
+            Prize.THIRD_PRIZE,
             Prize.FOURTH_PRIZE,
             Prize.FIFTH_PRIZE
     );

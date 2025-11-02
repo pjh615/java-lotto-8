@@ -7,7 +7,7 @@ public enum Prize {
 
     FIRST_PRIZE(6, 2_000_000_000, false, "6개 일치"),
     SECOND_PRIZE(5, 30_000_000, true, "5개 일치, 보너스 볼 일치"),
-    THRID_PRIZE(5, 1_500_000, false, "5개 일치"),
+    THIRD_PRIZE(5, 1_500_000, false, "5개 일치"),
     FOURTH_PRIZE(4, 50_000, false, "4개 일치"),
     FIFTH_PRIZE(3, 5_000, false, "3개 일치"),
     MISS(0, 0, false, "낙첨");

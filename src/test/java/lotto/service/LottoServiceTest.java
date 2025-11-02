@@ -66,7 +66,7 @@ public class LottoServiceTest {
 
         assertThat(prizeCount.get(Prize.FIFTH_PRIZE)).isEqualTo(1);
         assertThat(prizeCount.get(Prize.FOURTH_PRIZE)).isEqualTo(3);
-        assertThat(prizeCount.get(Prize.THRID_PRIZE)).isEqualTo(1);
+        assertThat(prizeCount.get(Prize.THIRD_PRIZE)).isEqualTo(1);
         assertThat(prizeCount.get(Prize.SECOND_PRIZE)).isEqualTo(1);
         assertThat(prizeCount.get(Prize.FIRST_PRIZE)).isEqualTo(1);
     }
