@@ -21,9 +21,7 @@ public class Lotto {
     }
 
     private void validateRange(List<Integer> numbers) {
-        int start = numbers.getFirst();
-        int end = numbers.getLast();
-        if (start < 1 || end > 45 ) {
+        if (numbers.stream().anyMatch(n -> n < 1 || n > 45)) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1~45까지의 숫자로 이루어져야 합니다.");
         }
     }
