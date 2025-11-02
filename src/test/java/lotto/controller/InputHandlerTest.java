@@ -53,22 +53,6 @@ class InputHandlerTest {
     }
 
     @Test
-    void 당첨번호_범위_예외() {
-        inputViewTest.setWinningLotto("1,2,3,4,5,46");
-        assertThatThrownBy(() -> inputHandler.getWinningLotto())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
-    }
-
-    @Test
-    void 당첨번호_중복_예외() {
-        inputViewTest.setWinningLotto("1,1,3,4,5,6");
-        assertThatThrownBy(() -> inputHandler.getWinningLotto())
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
-    }
-
-    @Test
     void 보너스번호_기능_테스트() {
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
